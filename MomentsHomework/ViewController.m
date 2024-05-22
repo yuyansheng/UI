@@ -9,6 +9,8 @@
 
 @interface ViewController ()
 
+@property (nonatomic) UITableView *tableView;
+
 @end
 
 @implementation ViewController
