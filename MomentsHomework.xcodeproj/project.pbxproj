@@ -17,6 +17,7 @@
 		52C0DEF42BFDA3FA008D5367 /* MomentsHomeworkTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 52C0DEF32BFDA3FA008D5367 /* MomentsHomeworkTests.m */; };
 		52C0DEFE2BFDA3FA008D5367 /* MomentsHomeworkUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 52C0DEFD2BFDA3FA008D5367 /* MomentsHomeworkUITests.m */; };
 		52C0DF002BFDA3FA008D5367 /* MomentsHomeworkUITestsLaunchTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 52C0DEFF2BFDA3FA008D5367 /* MomentsHomeworkUITestsLaunchTests.m */; };
+		52C0DF0E2BFDC52C008D5367 /* MomentCellModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 52C0DF0D2BFDC52C008D5367 /* MomentCellModel.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -54,6 +55,8 @@
 		52C0DEF92BFDA3FA008D5367 /* MomentsHomeworkUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MomentsHomeworkUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		52C0DEFD2BFDA3FA008D5367 /* MomentsHomeworkUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MomentsHomeworkUITests.m; sourceTree = "<group>"; };
 		52C0DEFF2BFDA3FA008D5367 /* MomentsHomeworkUITestsLaunchTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MomentsHomeworkUITestsLaunchTests.m; sourceTree = "<group>"; };
+		52C0DF0C2BFDC52C008D5367 /* MomentCellModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MomentCellModel.h; sourceTree = "<group>"; };
+		52C0DF0D2BFDC52C008D5367 /* MomentCellModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MomentCellModel.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -115,6 +118,8 @@
 				52C0DEE52BFDA3F9008D5367 /* LaunchScreen.storyboard */,
 				52C0DEE82BFDA3F9008D5367 /* Info.plist */,
 				52C0DEE92BFDA3F9008D5367 /* main.m */,
+				52C0DF0C2BFDC52C008D5367 /* MomentCellModel.h */,
+				52C0DF0D2BFDC52C008D5367 /* MomentCellModel.m */,
 			);
 			path = MomentsHomework;
 			sourceTree = "<group>";
@@ -267,6 +272,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				52C0DEDF2BFDA3F8008D5367 /* ViewController.m in Sources */,
+				52C0DF0E2BFDC52C008D5367 /* MomentCellModel.m in Sources */,
 				52C0DED92BFDA3F8008D5367 /* AppDelegate.m in Sources */,
 				52C0DEEA2BFDA3F9008D5367 /* main.m in Sources */,
 				52C0DEDC2BFDA3F8008D5367 /* SceneDelegate.m in Sources */,

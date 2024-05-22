@@ -6,6 +6,7 @@
 //
 
 #import "ViewController.h"
+#import "MomentCellModel.h"
 
 @interface ViewController ()
 
