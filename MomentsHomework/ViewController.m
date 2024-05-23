@@ -5,12 +5,15 @@
 //  Created by sanmuzhang on 2024/5/22.
 //
 
+#import "FrameMomentCell.h"
 #import "ViewController.h"
-#import "MomentCellModel.h"
+#import "FrameMomentCell.h"
 
 @interface ViewController ()
 
-@property (nonatomic) UITableView *tableView;
+@property (nonatomic, strong) UITableView *tableView;
+
+@property (nonatomic, copy) NSArray <MomentCellModel *> *cellModels;
 
 @end
 
@@ -18,7 +21,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    // Do any additional setup after loading the view
 }
 
 

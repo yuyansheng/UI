@@ -18,6 +18,7 @@
 		52C0DEFE2BFDA3FA008D5367 /* MomentsHomeworkUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 52C0DEFD2BFDA3FA008D5367 /* MomentsHomeworkUITests.m */; };
 		52C0DF002BFDA3FA008D5367 /* MomentsHomeworkUITestsLaunchTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 52C0DEFF2BFDA3FA008D5367 /* MomentsHomeworkUITestsLaunchTests.m */; };
 		52C0DF0E2BFDC52C008D5367 /* MomentCellModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 52C0DF0D2BFDC52C008D5367 /* MomentCellModel.m */; };
+		52C0DF142BFDDA1C008D5367 /* FrameMomentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 52C0DF132BFDDA1C008D5367 /* FrameMomentCell.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -57,6 +58,8 @@
 		52C0DEFF2BFDA3FA008D5367 /* MomentsHomeworkUITestsLaunchTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MomentsHomeworkUITestsLaunchTests.m; sourceTree = "<group>"; };
 		52C0DF0C2BFDC52C008D5367 /* MomentCellModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MomentCellModel.h; sourceTree = "<group>"; };
 		52C0DF0D2BFDC52C008D5367 /* MomentCellModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MomentCellModel.m; sourceTree = "<group>"; };
+		52C0DF122BFDDA1C008D5367 /* FrameMomentCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FrameMomentCell.h; sourceTree = "<group>"; };
+		52C0DF132BFDDA1C008D5367 /* FrameMomentCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FrameMomentCell.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -120,6 +123,8 @@
 				52C0DEE92BFDA3F9008D5367 /* main.m */,
 				52C0DF0C2BFDC52C008D5367 /* MomentCellModel.h */,
 				52C0DF0D2BFDC52C008D5367 /* MomentCellModel.m */,
+				52C0DF122BFDDA1C008D5367 /* FrameMomentCell.h */,
+				52C0DF132BFDDA1C008D5367 /* FrameMomentCell.m */,
 			);
 			path = MomentsHomework;
 			sourceTree = "<group>";
@@ -274,6 +279,7 @@
 				52C0DEDF2BFDA3F8008D5367 /* ViewController.m in Sources */,
 				52C0DF0E2BFDC52C008D5367 /* MomentCellModel.m in Sources */,
 				52C0DED92BFDA3F8008D5367 /* AppDelegate.m in Sources */,
+				52C0DF142BFDDA1C008D5367 /* FrameMomentCell.m in Sources */,
 				52C0DEEA2BFDA3F9008D5367 /* main.m in Sources */,
 				52C0DEDC2BFDA3F8008D5367 /* SceneDelegate.m in Sources */,
 			);

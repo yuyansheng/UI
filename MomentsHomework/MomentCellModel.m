@@ -9,7 +9,7 @@
 
 CGFloat const cellImageWidth = 100;
 CGFloat const cellImageHeight = 100;
-CGFloat const cellTextHeight = 100;
+CGFloat const cellTextHeight = 20;
 
 @interface MomentCellModel ()
 
@@ -28,6 +28,8 @@ CGFloat const cellTextHeight = 100;
             [images addObject:[self createImageWithColor:UIColor.redColor imageSize:CGSizeMake(cellImageWidth, cellImageHeight)]];
         }
         _images = [images copy];
+        _userName = @"用户名";
+        _userText = @"这是一段文章";
     }
     
     return self;
