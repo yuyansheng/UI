@@ -36,7 +36,7 @@ CGFloat const cellTextHeight = 20;
 }
 
 - (CGFloat)cellHeight{
-    return ceil(self.images.count / 3.0 * cellImageHeight);
+    return ceil(self.images.count / 3.f ) * cellImageHeight + cellTextHeight * 2 + 30;
 }
 
 //通过颜色创建一个矩形
