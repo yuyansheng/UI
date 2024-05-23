@@ -29,7 +29,7 @@ CGFloat const cellTextHeight = 20;
         }
         _images = [images copy];
         _userName = @"用户名";
-        _userText = @"这是一段文章";
+        _userText = @"这是一段文章sdsadsafsdfasdfasfsadfasdfsafasdfasdfsadfasdfdasfasfsa1";
     }
     
     return self;

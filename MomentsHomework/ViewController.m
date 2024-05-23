@@ -8,12 +8,15 @@
 #import "FrameMomentCell.h"
 #import "ViewController.h"
 #import "FrameMomentCell.h"
+#import "AutoLayoutMomentCell.h"
 
 @interface ViewController ()<UITableViewDelegate,UITableViewDataSource>
 
 @property (nonatomic, strong) UITableView *tableView;
 
 @property (nonatomic, copy) NSArray <MomentCellModel *> *cellModels;
+
+@property (nonatomic, getter=isFrameShow) BOOL FrameShow;
 
 @end
 
@@ -23,11 +26,15 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view
     [self.view addSubview:self.tableView];
+    self.FrameShow = 0;
+    self.tableView.rowHeight = UITableViewAutomaticDimension;
+    self.tableView.estimatedRowHeight = 100;
+    self.tableView.translatesAutoresizingMaskIntoConstraints = NO;
     [self.tableView reloadData];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return [self.cellModels[indexPath.row] cellHeight];
+    return UITableViewAutomaticDimension;
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
@@ -39,16 +46,18 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    UITableViewCell<MomentCellModelUpdateable> *cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass([FrameMomentCell class]) forIndexPath:indexPath];
-    
-    
-    [cell updateCellModel:self.cellModels[indexPath.row]];
-    
-    return cell;
+    if([self isFrameShow]){
+        UITableViewCell<MomentCellModelUpdateable> *cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass([FrameMomentCell class]) forIndexPath:indexPath];
+        [cell updateCellModel:self.cellModels[indexPath.row]];
+        return cell;
+    }else{
+        UITableViewCell<MomentCellModelUpdateable> *cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass([AutoLayoutMomentCell class]) forIndexPath:indexPath];
+        [cell updateCellModel:self.cellModels[indexPath.row]];
+        return cell;
+    }
 }
 
 - (UITableView *)tableView{
-    NSLog(@"!!!!!");
     if(!_tableView){
         _tableView = [[UITableView alloc] initWithFrame:UIScreen.mainScreen.bounds];
         _tableView.delegate = self;
@@ -56,14 +65,15 @@
         _tableView.backgroundColor = [UIColor clearColor];
         _tableView.showsVerticalScrollIndicator = NO;
         _tableView.bounces = NO;
-        [_tableView registerClass:[FrameMomentCell class] forCellReuseIdentifier:NSStringFromClass([FrameMomentCell class])];
+        //[_tableView registerClass:[FrameMomentCell class] forCellReuseIdentifier:NSStringFromClass([FrameMomentCell class])];
+        [_tableView registerClass:[AutoLayoutMomentCell class] forCellReuseIdentifier:NSStringFromClass([AutoLayoutMomentCell class])];
     }
     return _tableView;
 }
 - (NSArray<MomentCellModel *> *)cellModels{
     if(!_cellModels){
         NSMutableArray<MomentCellModel *> *cellModels = [NSMutableArray array];
-        for(int i = 0; i < 10; i ++){
+        for(int i = 0; i < 100; i ++){
             [cellModels addObject:[[MomentCellModel alloc] init]];
         }
         _cellModels = [cellModels copy];
