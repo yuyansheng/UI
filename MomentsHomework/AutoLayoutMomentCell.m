@@ -72,9 +72,11 @@
                                                                             attribute:NSLayoutAttributeNotAnAttribute
                                                                            multiplier:1
                                                                              constant:cellImageWidth];
+            
             [self.contentView addSubview:button];
             [self.buttons addObject:button];
             
+            //            masonry
             [self.contentView addConstraints:@[buttonTopByUserText, buttonLeftByUserText, buttonWidth, buttonHeight]];
             
             

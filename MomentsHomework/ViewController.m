@@ -7,18 +7,13 @@
 
 #import "FrameMomentCell.h"
 #import "ViewController.h"
-#import "FrameMomentCell.h"
-#import "AutoLayoutMomentCell.h"
+#import "MomentCollectionViewCell.h"
 
-@interface ViewController ()<UITableViewDelegate,UITableViewDataSource>
-
-@property (nonatomic, strong) UITableView *tableView;
-
-@property (nonatomic, strong) UIButton *button;
+@interface ViewController ()<UICollectionViewDelegate, UICollectionViewDataSource>
 
 @property (nonatomic, copy) NSArray <MomentCellModel *> *cellModels;
 
-@property (nonatomic, getter=isFrameShow) BOOL FrameShow;
+@property (nonatomic, copy) UICollectionView *collectionView;
 
 @end
 
@@ -26,67 +21,57 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self.view addSubview:self.tableView];
-    self.FrameShow = 1;
-    [self.tableView reloadData];
+    [self.view addSubview:self.collectionView];
+    [self.collectionView reloadData];
 }
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    [self changeTableViewCell];
+
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
+    return self.cellModels[section].images.count;
 }
 
--(void)changeTableViewCell{
-    if([self isFrameShow]){
-        self.FrameShow = 0;
-        self.tableView.rowHeight = UITableViewAutomaticDimension;
-        self.tableView.estimatedRowHeight = 150;
-    }else {
-        self.FrameShow = 1;
-        
-    }
-    [self.tableView reloadData];
-}
-
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    if([self isFrameShow]){
-        return [self.cellModels[indexPath.row] cellHeight];
-    }
-    return UITableViewAutomaticDimension;
-}
-
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-    return 1;
-}
-
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+- (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView{
     return self.cellModels.count;
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    if([self isFrameShow]){
-        UITableViewCell<MomentCellModelUpdateable> *cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass([FrameMomentCell class]) forIndexPath:indexPath];
-        [cell updateCellModel:self.cellModels[indexPath.row]];
-        return cell;
-    }else{
-        UITableViewCell<MomentCellModelUpdateable> *cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass([AutoLayoutMomentCell class]) forIndexPath:indexPath];
-        [cell updateCellModel:self.cellModels[indexPath.row]];
-        return cell;
-    }
+//- (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath{
+//    if([kind isEqualToString:UICollectionElementKindSectionHeader]){
+//        UICollectionReusableView *header = [collectionView dequeueReusableSupplementaryViewOfKind:kind
+//                                                                              withReuseIdentifier:NSStringFromClass([UICollectionView class])
+//                                                                                     forIndexPath:indexPath];
+//        header.text
+//        
+//    }
+//    return nil;
+//}
+
+- (__kindof UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
+    UICollectionViewCell<MomentCellModelUpdateable> *cell = [collectionView dequeueReusableCellWithReuseIdentifier:NSStringFromClass([MomentCollectionViewCell class]) forIndexPath:indexPath];
+    //NSLog(@"22222");
+    [cell updateCellModelByImage:self.cellModels[indexPath.section].images[indexPath.row]];
+    
+    return cell;
 }
 
-- (UITableView *)tableView{
-    if(!_tableView){
-        _tableView = [[UITableView alloc] initWithFrame:UIScreen.mainScreen.bounds];
-        _tableView.delegate = self;
-        _tableView.dataSource = self;
-        _tableView.backgroundColor = [UIColor clearColor];
-        _tableView.showsVerticalScrollIndicator = NO;
-        _tableView.bounces = NO;
-        [_tableView registerClass:[FrameMomentCell class] forCellReuseIdentifier:NSStringFromClass([FrameMomentCell class])];
-        [_tableView registerClass:[AutoLayoutMomentCell class] forCellReuseIdentifier:NSStringFromClass([AutoLayoutMomentCell class])];
+- (UICollectionView *)collectionView{
+    if(!_collectionView){
+        UICollectionViewFlowLayout *flowlayout = [[UICollectionViewFlowLayout alloc] init];
+        flowlayout.itemSize = CGSizeMake(100, 100);
+        NSLog(@"!!!");
+        flowlayout.minimumLineSpacing = 0.1;
+        flowlayout.minimumInteritemSpacing = 0.1;
+        flowlayout.sectionInset = UIEdgeInsetsMake(10, 45, 10, 45);
+        _collectionView = [[UICollectionView alloc] initWithFrame:self.view.frame collectionViewLayout:flowlayout];
+        _collectionView.delegate = self;
+        _collectionView.dataSource = self;
+        _collectionView.backgroundColor = [UIColor greenColor];
+        
+        [_collectionView registerClass:[MomentCollectionViewCell class] forCellWithReuseIdentifier:NSStringFromClass([MomentCollectionViewCell class])];
+        
     }
-    return _tableView;
+    return _collectionView;
 }
+
 - (NSArray<MomentCellModel *> *)cellModels{
     if(!_cellModels){
         NSMutableArray<MomentCellModel *> *cellModels = [NSMutableArray array];
@@ -97,4 +82,6 @@
     }
     return _cellModels;
 }
+
+
 @end

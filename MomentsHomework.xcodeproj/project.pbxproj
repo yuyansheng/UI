@@ -19,6 +19,7 @@
 		52C0DF002BFDA3FA008D5367 /* MomentsHomeworkUITestsLaunchTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 52C0DEFF2BFDA3FA008D5367 /* MomentsHomeworkUITestsLaunchTests.m */; };
 		52C0DF0E2BFDC52C008D5367 /* MomentCellModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 52C0DF0D2BFDC52C008D5367 /* MomentCellModel.m */; };
 		52C0DF142BFDDA1C008D5367 /* FrameMomentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 52C0DF132BFDDA1C008D5367 /* FrameMomentCell.m */; };
+		52C7EBE12C00421600A3304F /* MomentCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 52C7EBE02C00421600A3304F /* MomentCollectionViewCell.m */; };
 		52D15CEF2BFF161300F5EC72 /* AutoLayoutMomentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 52D15CEE2BFF161300F5EC72 /* AutoLayoutMomentCell.m */; };
 /* End PBXBuildFile section */
 
@@ -61,6 +62,8 @@
 		52C0DF0D2BFDC52C008D5367 /* MomentCellModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MomentCellModel.m; sourceTree = "<group>"; };
 		52C0DF122BFDDA1C008D5367 /* FrameMomentCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FrameMomentCell.h; sourceTree = "<group>"; };
 		52C0DF132BFDDA1C008D5367 /* FrameMomentCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FrameMomentCell.m; sourceTree = "<group>"; };
+		52C7EBDF2C00421600A3304F /* MomentCollectionViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MomentCollectionViewCell.h; sourceTree = "<group>"; };
+		52C7EBE02C00421600A3304F /* MomentCollectionViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MomentCollectionViewCell.m; sourceTree = "<group>"; };
 		52D15CED2BFF161300F5EC72 /* AutoLayoutMomentCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AutoLayoutMomentCell.h; sourceTree = "<group>"; };
 		52D15CEE2BFF161300F5EC72 /* AutoLayoutMomentCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AutoLayoutMomentCell.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -130,6 +133,8 @@
 				52C0DF0D2BFDC52C008D5367 /* MomentCellModel.m */,
 				52C0DF122BFDDA1C008D5367 /* FrameMomentCell.h */,
 				52C0DF132BFDDA1C008D5367 /* FrameMomentCell.m */,
+				52C7EBDF2C00421600A3304F /* MomentCollectionViewCell.h */,
+				52C7EBE02C00421600A3304F /* MomentCollectionViewCell.m */,
 			);
 			path = MomentsHomework;
 			sourceTree = "<group>";
@@ -285,6 +290,7 @@
 				52C0DEDF2BFDA3F8008D5367 /* ViewController.m in Sources */,
 				52C0DF0E2BFDC52C008D5367 /* MomentCellModel.m in Sources */,
 				52C0DED92BFDA3F8008D5367 /* AppDelegate.m in Sources */,
+				52C7EBE12C00421600A3304F /* MomentCollectionViewCell.m in Sources */,
 				52C0DF142BFDDA1C008D5367 /* FrameMomentCell.m in Sources */,
 				52C0DEEA2BFDA3F9008D5367 /* main.m in Sources */,
 				52C0DEDC2BFDA3F8008D5367 /* SceneDelegate.m in Sources */,

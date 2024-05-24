@@ -17,7 +17,11 @@ FOUNDATION_EXPORT CGFloat const cellTextHeight;
 
 @protocol MomentCellModelUpdateable <NSObject>
 
+@optional
+
 - (void)updateCellModel:(MomentCellModel *)cellModel;
+
+- (void)updateCellModelByImage:(UIImage *)Image;
 
 @end
 
