@@ -28,7 +28,7 @@
     [self.view addSubview:self.tableView];
     self.FrameShow = 0;
     self.tableView.rowHeight = UITableViewAutomaticDimension;
-    self.tableView.estimatedRowHeight = 100;
+    self.tableView.estimatedRowHeight = 150;
     self.tableView.translatesAutoresizingMaskIntoConstraints = NO;
     [self.tableView reloadData];
 }
