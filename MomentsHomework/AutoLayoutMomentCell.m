@@ -42,13 +42,13 @@
             button.layer.borderWidth = 1;
             CGFloat buttonX = i % 3 * cellImageWidth;
             CGFloat buttonY = floor(i / 3.0) * cellImageHeight;
-            NSLayoutConstraint * buttonTopByUserText = [NSLayoutConstraint constraintWithItem:button 
-                                                                                    attribute:NSLayoutAttributeTop
-                                                                                    relatedBy:NSLayoutRelationEqual 
-                                                                                       toItem:self.userText
-                                                                                    attribute:NSLayoutAttributeBottom
-                                                                                   multiplier:1
-                                                                                     constant:10 + buttonY ];
+//            NSLayoutConstraint * buttonTopByUserText = [NSLayoutConstraint constraintWithItem:button 
+//                                                                                    attribute:NSLayoutAttributeTop
+//                                                                                    relatedBy:NSLayoutRelationEqual 
+//                                                                                       toItem:self.userText
+//                                                                                    attribute:NSLayoutAttributeBottom
+//                                                                                   multiplier:1
+//                                                                                     constant:10 + buttonY ];
             
             NSLayoutConstraint *buttonLeftByUserText = [NSLayoutConstraint constraintWithItem:button
                                                                                     attribute:NSLayoutAttributeLeft
@@ -73,9 +73,13 @@
                                                                            multiplier:1
                                                                              constant:cellImageWidth];
             [self.contentView addSubview:button];
+            [NSLayoutConstraint activateConstraints:@[
+                [button.topAnchor constraintEqualToAnchor:self.userText.bottomAnchor constant:10 + buttonY]
+            ]];
+            
             [self.buttons addObject:button];
             
-            [self.contentView addConstraints:@[buttonTopByUserText, buttonLeftByUserText, buttonWidth, buttonHeight]];
+            [self.contentView addConstraints:@[ buttonLeftByUserText, buttonWidth, buttonHeight]];
             
             
         }
