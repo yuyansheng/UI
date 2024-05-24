@@ -14,6 +14,8 @@
 
 @property (nonatomic, strong) UITableView *tableView;
 
+@property (nonatomic, strong) UIButton *button;
+
 @property (nonatomic, copy) NSArray <MomentCellModel *> *cellModels;
 
 @property (nonatomic, getter=isFrameShow) BOOL FrameShow;
@@ -24,16 +26,31 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view
     [self.view addSubview:self.tableView];
-    self.FrameShow = 0;
-    self.tableView.rowHeight = UITableViewAutomaticDimension;
-    self.tableView.estimatedRowHeight = 150;
-    self.tableView.translatesAutoresizingMaskIntoConstraints = NO;
+    self.FrameShow = 1;
+    [self.tableView reloadData];
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    [self changeTableViewCell];
+}
+
+-(void)changeTableViewCell{
+    if([self isFrameShow]){
+        self.FrameShow = 0;
+        self.tableView.rowHeight = UITableViewAutomaticDimension;
+        self.tableView.estimatedRowHeight = 150;
+    }else {
+        self.FrameShow = 1;
+        
+    }
     [self.tableView reloadData];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    if([self isFrameShow]){
+        return [self.cellModels[indexPath.row] cellHeight];
+    }
     return UITableViewAutomaticDimension;
 }
 
@@ -65,7 +82,7 @@
         _tableView.backgroundColor = [UIColor clearColor];
         _tableView.showsVerticalScrollIndicator = NO;
         _tableView.bounces = NO;
-        //[_tableView registerClass:[FrameMomentCell class] forCellReuseIdentifier:NSStringFromClass([FrameMomentCell class])];
+        [_tableView registerClass:[FrameMomentCell class] forCellReuseIdentifier:NSStringFromClass([FrameMomentCell class])];
         [_tableView registerClass:[AutoLayoutMomentCell class] forCellReuseIdentifier:NSStringFromClass([AutoLayoutMomentCell class])];
     }
     return _tableView;

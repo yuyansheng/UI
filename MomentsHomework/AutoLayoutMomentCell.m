@@ -27,9 +27,6 @@
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier{
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if(self){
-       // self.myView = [[UIView alloc] init];
-       // self.myView.translatesAutoresizingMaskIntoConstraints = NO;
-        //[self addSubview:self.myView];
         self.contentView.backgroundColor = UIColor.greenColor;
         
         self.clipsToBounds = YES;
