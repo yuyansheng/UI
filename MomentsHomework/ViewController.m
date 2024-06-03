@@ -56,17 +56,14 @@
     if([self isFrameShow]){
          cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass([FrameMomentCell class]) 
                                                 forIndexPath:indexPath];
-        if(!cell){
-            cell = [[AutoLayoutMomentCell alloc] initWithStyle:UITableViewCellStyleDefault
-                                               reuseIdentifier:NSStringFromClass([FrameMomentCell class])];
-        }
     }else {
          cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass([AutoLayoutMomentCell class])
-                                                forIndexPath:indexPath];
-        if(!cell){
-            cell = [[AutoLayoutMomentCell alloc] initWithStyle:UITableViewCellStyleDefault
-                                               reuseIdentifier:NSStringFromClass([AutoLayoutMomentCell class])];
-        }
+                                                forIndexPath:indexPath];    }
+    if(!cell){
+        cell = self.isFrameShow ? [[FrameMomentCell alloc] initWithStyle:UITableViewCellStyleDefault
+                                                         reuseIdentifier:NSStringFromClass([FrameMomentCell class])]:
+                                  [[AutoLayoutMomentCell alloc] initWithStyle:UITableViewCellStyleDefault
+                                                              reuseIdentifier:NSStringFromClass([AutoLayoutMomentCell class])];
     }
     [cell updateCellModel:self.cellModels[indexPath.row]];
     return cell;
