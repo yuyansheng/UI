@@ -7,9 +7,12 @@
 
 #import "MomentCellModel.h"
 
-CGFloat const cellImageWidth = 100;
-CGFloat const cellImageHeight = 100;
-CGFloat const cellTextHeight = 20;
+CGFloat const MomentImageWidth = 100;
+CGFloat const MomentImageHeight = 100;
+CGFloat const MomentTextHeight = 20;
+CGFloat const MomentSpaceBetweenTopAndBottom = 10;
+CGFloat const MomentSpeceToLeft = 50;
+
 
 @interface MomentCellModel ()
 
@@ -18,14 +21,13 @@ CGFloat const cellTextHeight = 20;
 @implementation MomentCellModel
 
 - (instancetype)init{
-    
     self = [super init];
     
     if(self){
         int imageCount = random() % 9 + 1;
         NSMutableArray *images = [NSMutableArray array];
         for (int i = 0; i < imageCount; i ++){
-            [images addObject:[self createImageWithColor:UIColor.redColor imageSize:CGSizeMake(cellImageWidth, cellImageHeight)]];
+            [images addObject:[self mp_createImageWithColor:UIColor.redColor imageSize:CGSizeMake(MomentImageWidth, MomentImageHeight)]];
         }
         _images = [images copy];
         _userName = @"用户名";
@@ -35,18 +37,16 @@ CGFloat const cellTextHeight = 20;
     return self;
 }
 
+#pragma mark - public
 - (CGFloat)cellHeight{
-    return ceil(self.images.count / 3.f ) * cellImageHeight + cellTextHeight * 2 + 30;
+    return ceil(self.images.count / 3.f ) * MomentImageHeight + MomentTextHeight * 2 + MomentSpaceBetweenTopAndBottom * 3;
 }
 
-//通过颜色创建一个矩形
-- (UIImage *)createImageWithColor:(UIColor *)color imageSize:(CGSize)size{
+#pragma mark - Private
+- (UIImage *)mp_createImageWithColor:(UIColor *)color imageSize:(CGSize)size{
     CGRect tempRect = CGRectMake(0.0, 0.0, size.width, size.height);
-    //创建一个图片上下文
     UIGraphicsBeginImageContext(tempRect.size);
-    //得到图片上下文
     CGContextRef imageContext = UIGraphicsGetCurrentContext();
-    //
     CGContextSetFillColorWithColor(imageContext, [color CGColor]);
     CGContextFillRect(imageContext, tempRect);
     UIImage *resImage = UIGraphicsGetImageFromCurrentImageContext();

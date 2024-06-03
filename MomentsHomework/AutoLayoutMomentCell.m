@@ -9,129 +9,109 @@
 
 
 @interface AutoLayoutMomentCell ()
-
-@property (nonatomic, strong) NSMutableArray<UIButton *> *buttons;
-
+//按钮数组
+@property (nonatomic, strong) NSArray<UIButton *> *buttons;
+//用户名
 @property (nonatomic, strong) UILabel *userName;
-
-//@property (nonatomic, strong) UIView *myView;
-
+//一段文字
 @property (nonatomic, strong) UILabel *userText;
-
+//TableViewCell高度
 @property (nonatomic, strong) NSLayoutConstraint *tableViewCellHeight;
 
 @end
 
+
+#pragma mark - Init
 @implementation AutoLayoutMomentCell
 
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier{
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if(self){
         self.contentView.backgroundColor = UIColor.greenColor;
-        
         self.clipsToBounds = YES;
-
+        
         [self initUserName];
         [self initUserText];
-        for(int i = 0; i < 9; i ++){
-            UIButton *button = [[UIButton alloc] init];
-            button.translatesAutoresizingMaskIntoConstraints = NO;
-            button.backgroundColor = UIColor.whiteColor;
-            button.hidden = YES;
-            [button addTarget:self action:@selector(textButton) forControlEvents:UIControlEventTouchUpInside];
-            button.layer.borderWidth = 1;
-            CGFloat buttonX = i % 3 * cellImageWidth;
-            CGFloat buttonY = floor(i / 3.0) * cellImageHeight;
-//            NSLayoutConstraint * buttonTopByUserText = [NSLayoutConstraint constraintWithItem:button 
-//                                                                                    attribute:NSLayoutAttributeTop
-//                                                                                    relatedBy:NSLayoutRelationEqual 
-//                                                                                       toItem:self.userText
-//                                                                                    attribute:NSLayoutAttributeBottom
-//                                                                                   multiplier:1
-//                                                                                     constant:10 + buttonY ];
-            
-            NSLayoutConstraint *buttonLeftByUserText = [NSLayoutConstraint constraintWithItem:button
-                                                                                    attribute:NSLayoutAttributeLeft
-                                                                                    relatedBy:NSLayoutRelationEqual
-                                                                                       toItem:self.contentView
-                                                                                    attribute:NSLayoutAttributeLeft
-                                                                                   multiplier:1
-                                                                                     constant:50 + buttonX ];
-            
-            NSLayoutConstraint *buttonHeight = [NSLayoutConstraint constraintWithItem:button
-                                                                            attribute:NSLayoutAttributeHeight
-                                                                            relatedBy:NSLayoutRelationEqual
-                                                                               toItem:nil
-                                                                            attribute:NSLayoutAttributeNotAnAttribute
-                                                                           multiplier:1
-                                                                             constant:cellImageHeight];
-            NSLayoutConstraint *buttonWidth = [NSLayoutConstraint constraintWithItem:button
-                                                                            attribute:NSLayoutAttributeWidth
-                                                                            relatedBy:NSLayoutRelationEqual
-                                                                               toItem:nil
-                                                                            attribute:NSLayoutAttributeNotAnAttribute
-                                                                           multiplier:1
-                                                                             constant:cellImageWidth];
-            [self.contentView addSubview:button];
-            [NSLayoutConstraint activateConstraints:@[
-                [button.topAnchor constraintEqualToAnchor:self.userText.bottomAnchor constant:10 + buttonY]
-            ]];
-            
-            [self.buttons addObject:button];
-            
-            [self.contentView addConstraints:@[ buttonLeftByUserText, buttonWidth, buttonHeight]];
-            
-            
-        }
+        [self initButtons];
         
     }
     return self;
 }
 
+- (void)initButtons{
+    
+    NSMutableArray *buttons = [NSMutableArray array];
+    for(int i = 0; i < 9; i ++){
+        UIButton *button = [[UIButton alloc] init];
+        button.translatesAutoresizingMaskIntoConstraints = NO;
+        button.backgroundColor = UIColor.whiteColor;
+        button.hidden = YES;
+        [button addTarget:self action:@selector(textButton) forControlEvents:UIControlEventTouchUpInside];
+        button.layer.borderWidth = 1;
+        
+        CGFloat buttonX = i % 3 * MomentImageWidth;
+        CGFloat buttonY = floor(i / 3.0) * MomentImageHeight;
+        [self.contentView addSubview:button];
+        
+        NSLayoutConstraint *buttonTop = [button.topAnchor constraintEqualToAnchor:_userText.bottomAnchor
+                                                                         constant:MomentSpaceBetweenTopAndBottom + buttonY];
+        buttonTop.priority = UILayoutPriorityDefaultLow;
+        [NSLayoutConstraint activateConstraints:@[
+            buttonTop,
+            [button.heightAnchor constraintEqualToConstant:MomentImageHeight],
+            [button.widthAnchor constraintEqualToConstant:MomentImageWidth],
+            [button.leftAnchor constraintEqualToAnchor:self.contentView.leftAnchor
+                                              constant:MomentSpeceToLeft + buttonX]
+        ]];
+        
+      [buttons addObject:button];
+    }
+    _buttons = [buttons copy];
+}
+
 - (void)initUserName{
-    [self.contentView addSubview:self.userName];
-    self.userName.backgroundColor = [UIColor blueColor];
-    self.userName.translatesAutoresizingMaskIntoConstraints = NO;
-    NSDictionary *textDic = @{@"userName":self.userName};
-    NSString *userNameHVFL = @"H:|-1-[userName]";
-    NSString *userNameVVFL = @"V:|-1-[userName]";
-    NSArray<NSLayoutConstraint *> *cH = [NSLayoutConstraint constraintsWithVisualFormat:userNameHVFL options:0 metrics:nil views:textDic];
-    NSArray<NSLayoutConstraint *> *cV = [NSLayoutConstraint constraintsWithVisualFormat:userNameVVFL options:0 metrics:nil views:textDic];
-    [self.contentView addConstraints:cH];
-    [self.contentView addConstraints:cV];
+    _userName = _userName = [[UILabel alloc] init];
+    _userName.backgroundColor = [UIColor blueColor];
+    _userName.translatesAutoresizingMaskIntoConstraints = NO;
+    [self.contentView addSubview:_userName];
+    
+    [NSLayoutConstraint activateConstraints:@[
+        [_userName.topAnchor constraintEqualToAnchor:self.contentView.topAnchor constant:1],
+        [_userName.leftAnchor constraintEqualToAnchor:self.contentView.leftAnchor constant:1]
+    ]];
 }
 
 - (void)initUserText{
-    self.userText.backgroundColor = [UIColor orangeColor];
-    [self.contentView addSubview:self.userText];
+    _userText = [[UILabel alloc] init];
+    _userText.backgroundColor = [UIColor orangeColor];
+    _userText.translatesAutoresizingMaskIntoConstraints = NO;
+    _userText.numberOfLines=0;
+    _userText.lineBreakMode = NSLineBreakByWordWrapping;
+    _userText.font = [UIFont systemFontOfSize:15];
     
-    self.userText.translatesAutoresizingMaskIntoConstraints = NO;
-    NSDictionary *textDic = @{@"userName":self.userName,@"userText":self.userText};
-    NSString *userTextHVFL = @"H:|-20-[userText]-20-|";
-    NSString *userTextVVFL = @"V:[userName]-10-[userText]";
-    self.userText.numberOfLines=0;
-    self.userText.lineBreakMode = NSLineBreakByWordWrapping;
-    self.userText.font = [UIFont systemFontOfSize:15];
-    NSArray<NSLayoutConstraint *> *cH = [NSLayoutConstraint constraintsWithVisualFormat:userTextHVFL options:0 metrics:nil views:textDic];
-    NSArray<NSLayoutConstraint *> *cV = [NSLayoutConstraint constraintsWithVisualFormat:userTextVVFL options:0 metrics:nil views:textDic];
-    [self.contentView addConstraints:cH];
-    [self.contentView addConstraints:cV];
+    [self.contentView addSubview:_userText];
+    
+    [NSLayoutConstraint activateConstraints:@[
+        [_userText.topAnchor constraintEqualToAnchor:self.userName.bottomAnchor constant:MomentSpaceBetweenTopAndBottom],
+        [_userText.leftAnchor constraintEqualToAnchor:self.contentView.leftAnchor constant:30],
+        [_userText.rightAnchor constraintEqualToAnchor:self.contentView.rightAnchor constant:30]
+    ]];
 }
 
-- (void)textButton{
-    NSLog(@"!!!!!!!!!!!!!!");
-}
-
+#pragma mark - MomentCellModelUpdateable
 - (void)updateCellModel:(MomentCellModel *)cellModel{
     
     self.userName.text = cellModel.userName;
     self.userText.text = cellModel.userText;
+    
     for ( int i = 0; i < 9; i ++){
         if(i >= self.buttons.count){
-            NSAssert(NO, @"(void)updateCellModel:(MomentCellModel *)cellModel{ 错误");
+            NSAssert(NO, @"check updateCellModel");
             return;
         }
+        
         UIButton *button = self.buttons[i];
+        
         if(i < cellModel.images.count){
             button.hidden = NO;
             [button setBackgroundImage:cellModel.images[i] forState:UIControlStateNormal];
@@ -139,55 +119,25 @@
             button.hidden = YES;
         }
     }
+    
     [self updateTableViewCellHeight:self.buttons[cellModel.images.count - 1]];
- 
 }
 
+#pragma mark ClickEvent
+- (void)textButton{
+    NSLog(@"!!!!!!!!!!!!!!");
+}
+
+#pragma mark -Private
 - (void)updateTableViewCellHeight:(UIButton *)button{
-    NSLog(@"111111111");
+    
     if(_tableViewCellHeight){
         [self.contentView removeConstraint:self.tableViewCellHeight];
     }
-    self.tableViewCellHeight = [NSLayoutConstraint constraintWithItem:self.contentView
-                                                            attribute:NSLayoutAttributeBottom
-                                                            relatedBy:NSLayoutRelationEqual
-                                                               toItem:button
-                                                            attribute:NSLayoutAttributeBottom
-                                                           multiplier:1
-                                                             constant:10];
+    self.tableViewCellHeight = [self.contentView.bottomAnchor constraintEqualToAnchor:button.bottomAnchor
+                                                                             constant:10];
     [self.contentView addConstraint:self.tableViewCellHeight];
 }
 
-- (UILabel *)userText{
-    if(!_userText){
-        _userText = [[UILabel alloc] init];
-    }
-    return _userText;
-}
-
-- (UILabel *)userName{
-    if(!_userName){
-        _userName = [[UILabel alloc] init];
-    }
-    return _userName;
-}
-
-- (NSMutableArray<UIButton *> *)buttons {
-    if (!_buttons) {
-        _buttons = [NSMutableArray array];
-    }
-    return _buttons;
-}
-
-- (void)awakeFromNib {
-    [super awakeFromNib];
-    // Initialization code
-}
-
-- (void)setSelected:(BOOL)selected animated:(BOOL)animated {
-    
-    [super setSelected:selected animated:animated];
-    
-}
 
 @end
