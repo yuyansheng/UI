@@ -7,15 +7,17 @@
 
 #import "AutoLayoutMomentCell.h"
 
-@interface AutoLayoutMomentCell ()
+@interface AutoLayoutMomentCell (){
+    /// contentView的底部约束
+    NSLayoutConstraint *_contentViewBottomConstraint;
+}
 /// 按钮数组
 @property (nonatomic, copy) NSArray<UIButton *> *buttons;
 /// 用户名
 @property (nonatomic, strong) UILabel *nickNameLable;
 /// 一段文字
 @property (nonatomic, strong) UILabel *contentLable;
-/// contentView的底部约束
-@property (nonatomic, strong) NSLayoutConstraint *contentViewBottomConstraint;
+
 
 @end
 
@@ -127,10 +129,10 @@
 ///用于更新contentView的底部约束
 - (void)contentViewBottomConstraint:(UIButton *)button {
     if (_contentViewBottomConstraint) {
-        [self.contentView removeConstraint:self.contentViewBottomConstraint];
+        [self.contentView removeConstraint:_contentViewBottomConstraint];
     }
-    self.contentViewBottomConstraint = [self.contentView.bottomAnchor constraintEqualToAnchor:button.bottomAnchor constant:10];
-    [self.contentView addConstraint:self.contentViewBottomConstraint];
+    _contentViewBottomConstraint = [self.contentView.bottomAnchor constraintEqualToAnchor:button.bottomAnchor constant:10];
+    [self.contentView addConstraint:_contentViewBottomConstraint];
 }
 
 @end
