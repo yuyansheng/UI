@@ -9,9 +9,8 @@
 #import "MomentCellModel.h"
 NS_ASSUME_NONNULL_BEGIN
 
-@interface AutoLayoutMomentCell : UITableViewCell
-    <MomentCellModelUpdateable>
-
+/// 动态布局的TableViewCell可以接收一个MomentCellModel的数据来更新视图 布局样式是一个朋友圈
+@interface AutoLayoutMomentCell : UITableViewCell <MomentCellModelUpdateable>
 @end
 
 NS_ASSUME_NONNULL_END

@@ -7,137 +7,130 @@
 
 #import "AutoLayoutMomentCell.h"
 
-
 @interface AutoLayoutMomentCell ()
-//按钮数组
-@property (nonatomic, strong) NSArray<UIButton *> *buttons;
-//用户名
-@property (nonatomic, strong) UILabel *userName;
-//一段文字
-@property (nonatomic, strong) UILabel *userText;
-//TableViewCell高度
-@property (nonatomic, strong) NSLayoutConstraint *tableViewCellHeight;
+/// 按钮数组
+@property (nonatomic, copy) NSArray<UIButton *> *buttons;
+/// 用户名
+@property (nonatomic, strong) UILabel *nickNameLable;
+/// 一段文字
+@property (nonatomic, strong) UILabel *contentLable;
+/// contentView的底部约束
+@property (nonatomic, strong) NSLayoutConstraint *contentViewBottomConstraint;
 
 @end
 
-
-#pragma mark - Init
 @implementation AutoLayoutMomentCell
 
-- (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier{
-    self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
-    if(self){
+#pragma mark - Init
+
+- (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
+    if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
         self.contentView.backgroundColor = UIColor.greenColor;
-        self.clipsToBounds = YES;
-        
-        [self initUserName];
-        [self initUserText];
+
+        [self initnickNameLable];
+        [self initcontentLable];
         [self initButtons];
-        
     }
     return self;
 }
 
-- (void)initButtons{
-    
+- (void)initButtons {
     NSMutableArray *buttons = [NSMutableArray array];
-    for(int i = 0; i < 9; i ++){
+    for (int i = 0; i < 9; i++) {
         UIButton *button = [[UIButton alloc] init];
         button.translatesAutoresizingMaskIntoConstraints = NO;
         button.backgroundColor = UIColor.whiteColor;
         button.hidden = YES;
-        [button addTarget:self action:@selector(textButton) forControlEvents:UIControlEventTouchUpInside];
         button.layer.borderWidth = 1;
+        [button addTarget:self action:@selector(testButton) forControlEvents:UIControlEventTouchUpInside];
         
-        CGFloat buttonX = i % 3 * MomentImageWidth;
-        CGFloat buttonY = floor(i / 3.0) * MomentImageHeight;
+        CGFloat buttonX = i % 3 * kMomentImageWidth;
+        CGFloat buttonY = floor(i / 3.0) * kMomentImageHeight;
         [self.contentView addSubview:button];
-        
-        NSLayoutConstraint *buttonTop = [button.topAnchor constraintEqualToAnchor:_userText.bottomAnchor
-                                                                         constant:MomentSpaceBetweenTopAndBottom + buttonY];
+
+        NSLayoutConstraint *buttonTop = [button.topAnchor constraintEqualToAnchor:_contentLable.bottomAnchor
+                                                                         constant:kMomentSpaceBetweenTopAndBottom + buttonY];
         buttonTop.priority = UILayoutPriorityDefaultLow;
         [NSLayoutConstraint activateConstraints:@[
-            buttonTop,
-            [button.heightAnchor constraintEqualToConstant:MomentImageHeight],
-            [button.widthAnchor constraintEqualToConstant:MomentImageWidth],
-            [button.leftAnchor constraintEqualToAnchor:self.contentView.leftAnchor
-                                              constant:MomentSpeceToLeft + buttonX]
+            buttonTop, [button.heightAnchor constraintEqualToConstant:kMomentImageHeight],
+            [button.widthAnchor constraintEqualToConstant:kMomentImageWidth],
+            [button.leftAnchor constraintEqualToAnchor:self.contentView.leftAnchor constant:kMomentSpeceToLeft + buttonX]
         ]];
-        
-      [buttons addObject:button];
+
+        [buttons addObject:button];
     }
     _buttons = [buttons copy];
 }
 
-- (void)initUserName{
-    _userName = _userName = [[UILabel alloc] init];
-    _userName.backgroundColor = [UIColor blueColor];
-    _userName.translatesAutoresizingMaskIntoConstraints = NO;
-    [self.contentView addSubview:_userName];
+- (void)initnickNameLable {
+    _nickNameLable = _nickNameLable = [[UILabel alloc] init];
+    _nickNameLable.backgroundColor = [UIColor blueColor];
+    _nickNameLable.translatesAutoresizingMaskIntoConstraints = NO;
+    
+    [self.contentView addSubview:_nickNameLable];
     
     [NSLayoutConstraint activateConstraints:@[
-        [_userName.topAnchor constraintEqualToAnchor:self.contentView.topAnchor constant:1],
-        [_userName.leftAnchor constraintEqualToAnchor:self.contentView.leftAnchor constant:1]
+        [_nickNameLable.topAnchor constraintEqualToAnchor:self.contentView.topAnchor constant:1],
+        [_nickNameLable.leftAnchor constraintEqualToAnchor:self.contentView.leftAnchor constant:1]
     ]];
 }
 
-- (void)initUserText{
-    _userText = [[UILabel alloc] init];
-    _userText.backgroundColor = [UIColor orangeColor];
-    _userText.translatesAutoresizingMaskIntoConstraints = NO;
-    _userText.numberOfLines=0;
-    _userText.lineBreakMode = NSLineBreakByWordWrapping;
-    _userText.font = [UIFont systemFontOfSize:15];
-    
-    [self.contentView addSubview:_userText];
+- (void)initcontentLable {
+    _contentLable = [[UILabel alloc] init];
+    _contentLable.backgroundColor = [UIColor orangeColor];
+    _contentLable.translatesAutoresizingMaskIntoConstraints = NO;
+    _contentLable.numberOfLines = 0;
+    _contentLable.lineBreakMode = NSLineBreakByWordWrapping;
+    _contentLable.font = [UIFont systemFontOfSize:15];
+
+    [self.contentView addSubview:_contentLable];
     
     [NSLayoutConstraint activateConstraints:@[
-        [_userText.topAnchor constraintEqualToAnchor:self.userName.bottomAnchor constant:MomentSpaceBetweenTopAndBottom],
-        [_userText.leftAnchor constraintEqualToAnchor:self.contentView.leftAnchor constant:30],
-        [_userText.rightAnchor constraintEqualToAnchor:self.contentView.rightAnchor constant:30]
+        [_contentLable.topAnchor constraintEqualToAnchor:self.nickNameLable.bottomAnchor constant:kMomentSpaceBetweenTopAndBottom],
+        [_contentLable.leftAnchor constraintEqualToAnchor:self.contentView.leftAnchor constant:30],
+        [_contentLable.rightAnchor constraintEqualToAnchor:self.contentView.rightAnchor constant:30]
     ]];
 }
 
 #pragma mark - MomentCellModelUpdateable
-- (void)updateCellModel:(MomentCellModel *)cellModel{
-    
-    self.userName.text = cellModel.userName;
-    self.userText.text = cellModel.userText;
-    
-    for ( int i = 0; i < 9; i ++){
-        if(i >= self.buttons.count){
+
+- (void)updateCellModel:(MomentCellModel *)cellModel {
+    self.nickNameLable.text = cellModel.nickNameLable;
+    self.contentLable.text = cellModel.contentLable;
+
+    for (int i = 0; i < 9; i++) {
+        if (i >= self.buttons.count) {
             NSAssert(NO, @"check updateCellModel");
             return;
         }
-        
+
         UIButton *button = self.buttons[i];
-        
-        if(i < cellModel.images.count){
+        if (i < cellModel.images.count) {
             button.hidden = NO;
             [button setBackgroundImage:cellModel.images[i] forState:UIControlStateNormal];
-        }else {
+        } else {
             button.hidden = YES;
         }
     }
-    
-    [self updateTableViewCellHeight:self.buttons[cellModel.images.count - 1]];
+    //图片数量发生变化所以contentView的底部约束需要更新一下
+    [self contentViewBottomConstraint:self.buttons[cellModel.images.count - 1]];
 }
 
 #pragma mark ClickEvent
-- (void)textButton{
+
+- (void)testButton {
     NSLog(@"!!!!!!!!!!!!!!");
 }
 
 #pragma mark -Private
-- (void)updateTableViewCellHeight:(UIButton *)button{
-    
-    if(_tableViewCellHeight){
-        [self.contentView removeConstraint:self.tableViewCellHeight];
-    }
-    self.tableViewCellHeight = [self.contentView.bottomAnchor constraintEqualToAnchor:button.bottomAnchor
-                                                                             constant:10];
-    [self.contentView addConstraint:self.tableViewCellHeight];
-}
 
+///用于更新contentView的底部约束
+- (void)contentViewBottomConstraint:(UIButton *)button {
+    if (_contentViewBottomConstraint) {
+        [self.contentView removeConstraint:self.contentViewBottomConstraint];
+    }
+    self.contentViewBottomConstraint = [self.contentView.bottomAnchor constraintEqualToAnchor:button.bottomAnchor constant:10];
+    [self.contentView addConstraint:self.contentViewBottomConstraint];
+}
 
 @end
