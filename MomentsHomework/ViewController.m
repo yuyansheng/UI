@@ -10,12 +10,12 @@
 #import "FrameMomentCell.h"
 #import "AutoLayoutMomentCell.h"
 
-@interface ViewController () <UITableViewDelegate,UITableViewDataSource>
+@interface ViewController () <UITableViewDelegate, UITableViewDataSource>
 
 @property (nonatomic, strong) UITableView *tableView;
 
 @property (nonatomic, copy) NSArray<MomentCellModel *> *cellModels;
-///是否使用静态布局方式展示
+/// 是否使用静态布局方式展示
 @property (nonatomic, getter=isFrameShow, assign) BOOL frameShow;
 
 @end
@@ -58,16 +58,16 @@
 /// 根据frameShow来决定返回的cell是动态布局还是静态布局
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell<MomentCellModelUpdateable> *cell;
-    
+
     if ([self isFrameShow]) {
         cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass([FrameMomentCell class]) forIndexPath:indexPath];
     } else {
         cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass([AutoLayoutMomentCell class]) forIndexPath:indexPath];
     }
-    
+
     if (!cell) {
         cell = self.isFrameShow
-                   ? [[FrameMomentCell alloc] initWithStyle:UITableViewCellStyleDefault 
+                   ? [[FrameMomentCell alloc] initWithStyle:UITableViewCellStyleDefault
                                             reuseIdentifier:NSStringFromClass([FrameMomentCell class])]
                    : [[AutoLayoutMomentCell alloc] initWithStyle:UITableViewCellStyleDefault
                                                  reuseIdentifier:NSStringFromClass([AutoLayoutMomentCell class])];
@@ -83,7 +83,7 @@
         self.tableView.rowHeight = UITableViewAutomaticDimension;
         self.tableView.estimatedRowHeight = 150;
     } else {
-        self.tableView.rowHeight = 150;
+        self.tableView.rowHeight = 0;
     }
     self.frameShow ^= 1;
     [self.tableView reloadData];
