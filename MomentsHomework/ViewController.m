@@ -16,7 +16,7 @@
 
 @property (nonatomic, copy) NSArray<MomentCellModel *> *cellModels;
 /// 是否使用静态布局方式展示
-@property (nonatomic, getter=isFrameShow, assign) BOOL frameShow;
+@property (nonatomic, assign, getter=isFrameShow) BOOL frameShow;
 
 @end
 
